@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2013 The Android Open Source Project
+     Copyright (C) 2026 Dmitry Tretyakov
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Holo4UX" />
+    <style name="Holo4UX.Theme.Dialog" />
+    <style name="Holo4UX.Widget" />
+    <style name="Holo4UX.TextAppearance" />
+    <style name="Holo4UX.TextAppearance.Dialog" />
+    <style name="Holo4UX.TextAppearance.Widget"/>
+    <style name="Holo4UX.TextAppearance.Widget.ActionBar" />
+
+    <style name="Holo4UX.Preference" parent="Preference">
+        <item name="android:windowBackground">@drawable/holo4ux_highlight</item>
+        <item name="android:background">@drawable/holo4ux_highlight</item>
+        <item name="layout">@layout/holo4ux_pref_widget</item>
+    </style>
+
+    <style name="Holo4UX.Preference.Category" parent="Preference.Category">
+        <item name="layout">@layout/holo4ux_pref_category</item>
+    </style>
+
+    <style name="Holo4UX.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="preferenceStyle">@style/Holo4UX.Preference</item>
+        <item name="preferenceCategoryStyle">@style/Holo4UX.Preference.Category</item>
+    </style>
+
+    <style name="Holo4UX.Theme.Dialog.Alert" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorAccent">@color/holo_blue_bright</item>
+        <item name="android:colorBackground">#ff222222</item>
+        <item name="buttonBarButtonStyle">@style/Holo4UX.Widget.Button.ButtonBar.AlertDialog</item>
+        <item name="android:windowTitleStyle">@style/Holo4UX.TextAppearance.Dialog.Title</item>
+        <item name="dialogPreferredPadding">12dp</item>
+    </style>
+
+    <style name="Holo4UX.TextAppearance.Dialog.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="Holo4UX.TextAppearance.Widget.ActionBar.Title" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Holo4UX.TextAppearance.Widget.ActionBar.Subtitle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ActionButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">56dip</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_holo4ux_menu_overflow</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="titleTextStyle">@style/Holo4UX.TextAppearance.Widget.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/Holo4UX.TextAppearance.Widget.ActionBar.Subtitle</item>
+        <item name="actionOverflowButtonStyle">@style/Holo4UX.Widget.ActionButton.Overflow</item>
+        <item name="homeLayout">@layout/holo4ux_layout_actionbar</item>
+        <item name="android:homeLayout" tools:targetApi="honeycomb">@layout/holo4ux_layout_actionbar</item>
+        <item name="android:divider">?android:attr/dividerVertical</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ActionBar.Solid" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetEnd">0dp</item>
+        <item name="background">@drawable/ic_holo4ux_ab_transparent</item>
+        <item name="backgroundSplit">@android:color/transparent</item>
+        <item name="backgroundStacked">@android:color/transparent</item>
+        <item name="android:divider">?android:attr/dividerVertical</item>
+        <item name="titleTextStyle">@style/Holo4UX.TextAppearance.Widget.ActionBar.Title</item>
+        <item name="subtitleTextStyle">@style/Holo4UX.TextAppearance.Widget.ActionBar.Subtitle</item>
+    </style>
+
+    <style name="Holo4UX.Widget.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/holo4ux_background_button</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">sans-serif</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
+    <style name="Holo4UX.Widget.CheckBox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/holo4ux_background_checkbox</item>
+    </style>
+
+    <style name="Holo4UX.Widget.Button.ButtonBar.AlertDialog" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="background">@drawable/holo4ux_highlight</item>
+        <item name="dividerPadding">0dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="Holo4UX.Widget.Button.ButtonBar" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:paddingTop">0dip</item>
+        <item name="paddingStart">0dip</item>
+        <item name="paddingEnd">0dip</item>
+        <item name="android:paddingBottom">0dip</item>
+        <item name="divider">?attr/dividerVertical</item>
+        <item name="showDividers">middle</item>
+    </style>
+
+    <style name="Holo4UX.Widget.Button.Radio" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@drawable/holo4ux_background_radiobtn</item>
+    </style>
+
+    <style name="Holo4UX.Widget.SeekBar" parent="Widget.AppCompat.SeekBar">
+        <item name="android:progressDrawable">@drawable/holo4ux_scrubber_progress_horizontal</item>
+        <item name="android:thumb">@drawable/holo4ux_scrubber_control_selector</item>
+        <item name="android:thumbOffset">15dp</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/holo4ux_progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@drawable/holo4ux_progress_indeterminate_horizontal</item>
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+    </style>
+    
+    <style name="Holo4UX.Widget.Switch" parent="Widget.AppCompat.CompoundButton.Switch">
+        <item name="track">@drawable/holo4ux_switch_track</item>
+        <item name="android:thumb">@drawable/holo4ux_switch_inner</item>
+        <item name="thumbTextPadding">12dip</item>
+        <item name="switchMinWidth">96dip</item>
+        <item name="switchPadding">16dip</item>
+        <item name="showText">true</item>
+        <item name="android:textOn">@string/text_on</item>
+        <item name="android:textOff">@string/text_off</item>
+    </style>
+
+</resources>
