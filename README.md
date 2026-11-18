@@ -1,5 +1,7 @@
 # Holo User Experience Library (Holo3/4 UX)
-Android Holo UX backward compatibility library for Android 2.x and above with native Android View
+Android Holo UX backward compatibility library for Android 2.x and above.
+
+Requires Android Support Library 24.0.0. Supports Android 2.1 and above.
 
 ### Holo4UX
 
