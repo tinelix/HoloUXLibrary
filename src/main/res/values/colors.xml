@@ -16,6 +16,21 @@
      limitations under the License.
 -->
 <resources>
-    <color name="holo_blue_bright">#33b5e5</color>
-    <color name="holo_blue_light">#3f9fe0</color>
+    <color name="holo_blue_bright">#00ddff</color>
+    <color name="holo_blue_light">#33b5e5</color>
+    <color name="holo_blue_dark">#0099cc</color>
+    <color name="holo_blue_twilight">#006a8d</color>
+    <color name="holo_red_light">#ff4444</color>
+    <color name="holo_red_dark">#cc0000</color>
+    <color name="holo_red_twilight">#8a0000</color>
+    <color name="holo_orange_light">#ffbb33</color>
+    <color name="holo_orange_dark">#ff8800</color>
+    <color name="holo_orange_twilight">#995200</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_green_dark">#ff669900</color>
+    <color name="holo_green_twilight">#ff486000</color>
+    <color name="holo_gray_light">#aaaaaa</color>
+    <color name="holo_gray">#6a6a6a</color>
+    <color name="holo_gray_twilight">#4a4a4a</color>
+    <color name="holo_gray_dark">#2a2a2a</color>
 </resources>

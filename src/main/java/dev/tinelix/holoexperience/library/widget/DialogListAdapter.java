@@ -43,13 +43,15 @@ public class DialogListAdapter extends RecyclerView.Adapter {
     private final AlertDialog mDialog;
 
     public DialogListAdapter(
-            AlertDialog dialog, String[] items, int type,
+            AlertDialog dialog, String[] items,
+            int defPosition, int type,
             DialogInterface.OnClickListener listener
     ) {
         mDialog = dialog;
         mItems = new ArrayList<>();
         mItems.addAll(Arrays.asList(items));
         mItemType = type;
+        mCheckedItemPosition = defPosition;
         mListener = listener;
     }
 

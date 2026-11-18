@@ -18,8 +18,10 @@
 <resources>
     <style name="Holo4UX.Theme" parent="@android:style/Theme.Holo">
         <item name="preferenceTheme">@style/Holo4UX.PreferenceThemeOverlay</item>
+        <item name="colorPrimary">#2a2a2a</item>
     </style>
     <style name="Holo4UX.Theme.NoActionBar" parent="@android:style/Theme.Holo.NoActionBar">
         <item name="preferenceTheme">@style/Holo4UX.PreferenceThemeOverlay</item>
+        <item name="colorPrimary">#2a2a2a</item>
     </style>
 </resources>

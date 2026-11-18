@@ -30,6 +30,12 @@
         <item name="android:layout">@layout/holo4ux_pref_widget</item>
     </style>
 
+    <style name="Holo4UX.CheckBoxPreference">
+        <item name="android:windowBackground">@drawable/holo4ux_highlight</item>
+        <item name="android:background">@drawable/holo4ux_highlight</item>
+        <item name="android:layout">@layout/holo4ux_pref_widget_checkbox</item>
+    </style>
+
     <style name="Holo4UX.Preference.Category">
         <item name="android:layout">@layout/holo4ux_pref_category</item>
     </style>
@@ -60,12 +66,12 @@
     <style name="Holo4UX.TextAppearance.Widget.ActionBar.Title" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily" tools:targetApi="jelly_bean">sans-serif</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="Holo4UX.TextAppearance.Widget.ActionBar.Subtitle" parent="@android:style/TextAppearance.Small">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
     </style>
 
     <style name="Holo4UX.Widget.ActionButton" parent="@android:style/Widget.ImageButton">
@@ -96,6 +102,13 @@
         <item name="subtitleTextStyle">@style/Holo4UX.TextAppearance.Widget.ActionBar.Subtitle</item>!-->
     </style>
 
+    <style name="Holo4UX.Widget.AutoCompleteTextView" parent="@android:style/Widget.AutoCompleteTextView">
+        <item name="android:background">@drawable/holo4ux_highlight</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:dropDownSelector">@drawable/holo4ux_highlight</item>
+    </style>
+
     <style name="Holo4UX.Widget.Button" parent="@android:style/Widget.Button">
         <item name="android:background">@drawable/holo4ux_dark_background_button</item>
         <item name="android:fontFamily" tools:ignore="NewApi">sans-serif</item>
@@ -109,7 +122,7 @@
         <item name="android:background">@drawable/holo4ux_highlight</item>
         <!--<item name="dividerPadding">0dp</item>
         <item name="textAllCaps">false</item>!-->
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="Holo4UX.Widget.Button.Radio" parent="@android:style/Widget.CompoundButton.RadioButton">
@@ -126,6 +139,9 @@
     </style>
 
     <style name="Holo4UX.Widget.ListView" parent="@android:style/Widget.ListView">
+        <item name="android:background">@color/holo_gray_dark</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:cacheColorHint">@android:color/transparent</item>
         <item name="android:listSelector">@drawable/holo4ux_highlight</item>
     </style>
 
@@ -135,6 +151,10 @@
         <item name="android:thumbOffset">15dp</item>
         <item name="android:paddingLeft">15dp</item>
         <item name="android:paddingRight">15dp</item>
+    </style>
+
+    <style name="Holo4UX.Widget.ProgressBar" parent="@android:style/Widget.ProgressBar">
+        <item name="android:indeterminateDrawable">@drawable/holo4ux_progress_medium</item>
     </style>
 
     <style name="Holo4UX.Widget.ProgressBar.Horizontal" parent="@android:style/Widget.ProgressBar.Horizontal">

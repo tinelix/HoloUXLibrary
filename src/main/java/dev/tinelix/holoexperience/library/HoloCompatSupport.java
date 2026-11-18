@@ -18,5 +18,21 @@
 
 package dev.tinelix.holoexperience.library;
 
+import android.content.Context;
+import android.content.res.Configuration;
+import android.os.Build;
+
 public class HoloCompatSupport {
+    public static boolean isTablet(Context ctx) {
+        if(ctx != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                return ctx.getResources().getConfiguration().smallestScreenWidthDp >= 600;
+            } else
+                return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB
+                        && (ctx.getResources().getConfiguration().screenLayout &
+                        Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        } else {
+            return false;
+        }
+    }
 }

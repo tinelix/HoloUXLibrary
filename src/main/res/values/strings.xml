@@ -19,4 +19,6 @@
     <string name="demo_text">You are viewing the Holo Experience demo activity.</string>
     <string name="text_on">ON</string>
     <string name="text_off">OFF</string>
+    <string name="menu_is_not_available">Currently the main menu of the app is missing or unavailable.</string>
+    <string name="holo4ux_clipboard">Clipboard</string>
 </resources>

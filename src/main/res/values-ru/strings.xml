@@ -19,4 +19,6 @@
     <string name="library_name">Holo4UX</string>
     <string name="text_on">ВКЛ</string>
     <string name="text_off">ВЫКЛ</string>
+    <string name="menu_is_not_available">Сейчас главное меню приложения отсутствует или недоступно.</string>
+    <string name="holo4ux_clipboard">Буфер обмена</string>
 </resources>

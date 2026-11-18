@@ -22,12 +22,17 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewDebug;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,9 +42,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import dev.tinelix.holoexperience.library.R;
 import dev.tinelix.holoexperience.library.widget.DialogListAdapter;
@@ -68,16 +76,21 @@ public class HoloAlertDialog extends AlertDialog {
         super(context);
         mParams = params;
 
-
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
             mDialogView = View.inflate(getContext(), R.layout.holo4ux_alert_dialog, null);
+            mDialogView.setLayoutParams(
+                    new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+            );
             return;
         }
 
         setTitle(mParams.mTitle);
         if(mParams.listItems != null)
-            setItems(mParams.listItems, false);
+            setItems(mParams.listItems, mParams.defListItemPos, false);
         else
             setView(mParams.mView);
 
@@ -103,7 +116,7 @@ public class HoloAlertDialog extends AlertDialog {
             );
     }
 
-    public void setItems(final String[] listItems, boolean multiChoice) {
+    public void setItems(final String[] listItems, int defPosition, boolean multiChoice) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 
             final ListView listView = new ListView(getContext());
@@ -122,6 +135,8 @@ public class HoloAlertDialog extends AlertDialog {
                             ListView.CHOICE_MODE_MULTIPLE :
                             ListView.CHOICE_MODE_SINGLE
             );
+
+            listView.setItemChecked(defPosition, true);
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -142,8 +157,8 @@ public class HoloAlertDialog extends AlertDialog {
 
             view.setAdapter(
                 new DialogListAdapter(
-                    this, listItems, multiChoice ? 2 : 1,
-                    mParams.listListener
+                    this, listItems, defPosition,
+                    multiChoice ? 2 : 1, mParams.listListener
                 )
             );
             setView(view);
@@ -196,8 +211,52 @@ public class HoloAlertDialog extends AlertDialog {
         if(view != null) {
             mDialogView.findViewById(R.id.contentPanel).setVisibility(View.GONE);
             FrameLayout layout = mDialogView.findViewById(R.id.custom);
+
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            );
+            view.setLayoutParams(params);
             layout.addView(view);
         }
+    }
+
+    @Override
+    public void setIcon(int resId) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            super.setIcon(resId);
+            return;
+        }
+
+        Drawable icon = getContext().getResources().getDrawable(resId);
+
+        ImageView iconView = mDialogView.findViewById(android.R.id.icon);
+
+        if(icon != null) {
+            iconView.setImageDrawable(icon);
+        }
+
+        iconView.setVisibility(icon != null ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void setIcon(Drawable icon) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            if(icon != null)
+                super.setIcon(icon);
+
+            if(getWindow() != null)
+                getWindow().getDecorView().findViewById(android.R.id.icon)
+                           .setVisibility(icon != null ? View.VISIBLE : View.GONE);
+            return;
+        }
+
+        ImageView iconView = mDialogView.findViewById(android.R.id.icon);
+
+        if(icon != null)
+            iconView.setImageDrawable(icon);
+
+        iconView.setVisibility(icon != null ? View.VISIBLE : View.GONE);
     }
 
     public static class DialogParams {
@@ -369,10 +428,13 @@ public class HoloAlertDialog extends AlertDialog {
 
     @Override
     public void show() {
-        super.show();
+        if(!isShowing())
+            super.show();
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            setIcon(null);
             return;
+        }
 
         if(mParams == null)
             return;
@@ -380,6 +442,11 @@ public class HoloAlertDialog extends AlertDialog {
         float dp = getContext().getResources().getDisplayMetrics().scaledDensity;
 
         if(getWindow() != null) {
+
+            Button negativeButton = mDialogView.findViewById(android.R.id.button2);
+            Button neutralButton = mDialogView.findViewById(android.R.id.button3);
+            Button positiveButton = mDialogView.findViewById(android.R.id.button1);
+
             getWindow().setBackgroundDrawable(
                     getContext().getResources().getDrawable(android.R.color.transparent)
             );
@@ -389,35 +456,44 @@ public class HoloAlertDialog extends AlertDialog {
 
             if(mParams.mTitle != null)
                 setTitle(mParams.mTitle);
-            else {
+            else
                 mDialogView.findViewById(R.id.topPanel).setVisibility(View.GONE);
-            }
 
             if(mParams.getButtonCount() > 0) {
                 if (mParams.mNegativeButton != null)
                     setButton(BUTTON_NEGATIVE, mParams.mNegativeButton.mTitle, mParams.mNegativeButton.mListener);
                 else
-                    mDialogView.findViewById(android.R.id.button2).setVisibility(View.GONE);
+                    negativeButton.setVisibility(View.GONE);
 
                 if (mParams.mNeutralButton != null)
                     setButton(BUTTON_NEUTRAL, mParams.mNeutralButton.mTitle, mParams.mNeutralButton.mListener);
                 else {
-                    mDialogView.findViewById(android.R.id.button3).setVisibility(View.GONE);
+                    neutralButton.setVisibility(View.GONE);
                     mDialogView.findViewById(R.id.bottomDivider2).setVisibility(View.GONE);
                 }
 
                 if (mParams.mPositiveButton != null)
                     setButton(BUTTON_POSITIVE, mParams.mPositiveButton.mTitle, mParams.mPositiveButton.mListener);
                 else {
-                    mDialogView.findViewById(android.R.id.button1).setVisibility(View.GONE);
+                    positiveButton.setVisibility(View.GONE);
                     mDialogView.findViewById(R.id.bottomDivider1).setVisibility(View.GONE);
                 }
+            } else {
+                mDialogView.findViewById(R.id.buttonPanel).setVisibility(View.GONE);
+                getWindow().getDecorView().setLayoutParams(
+                        new WindowManager.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT
+                        )
+                );
             }
 
             if(mParams.mView != null)
                 setView(mParams.mView);
             else if (mParams.listItems != null)
-                setItems(mParams.listItems, false);
+                setItems(mParams.listItems, mParams.defListItemPos, false);
+
+            setIcon(null);
 
             setContentView(mDialogView);
 
@@ -429,6 +505,26 @@ public class HoloAlertDialog extends AlertDialog {
             getWindow().setSoftInputMode(
                     WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE
             );
+
+            negativeButton.setTextColor(
+                    getContext().getResources().getColorStateList(R.color.holo4ux_dark_text_primary)
+            );
+
+            neutralButton.setTextColor(
+                    getContext().getResources().getColorStateList(R.color.holo4ux_dark_text_primary)
+            );
+
+            positiveButton.setTextColor(
+                    getContext().getResources().getColorStateList(R.color.holo4ux_dark_text_primary)
+            );
         }
+    }
+
+    public View getDialogView() {
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+            return null;
+
+        return mDialogView;
     }
 }

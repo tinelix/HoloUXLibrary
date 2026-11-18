@@ -22,6 +22,7 @@ import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.view.ViewGroup;
 
 import dev.tinelix.holoexperience.library.R;
 import dev.tinelix.holoexperience.library.app.HoloCompatActivity;
@@ -101,6 +102,20 @@ public class HoloCompatActionBar {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
             mActionBarHoneycomb.setSubtitle(subtitle);
         else if(mActionBar != null)
-            mActionBar.setTitle(subtitle);
+            mActionBar.setSubtitle(subtitle);
+    }
+
+    public void setHeight(int px) {
+        if(mActionBar != null) {
+            if(mActionBar.getLayoutParams() != null) {
+                mActionBar.getLayoutParams().height = px;
+            } else
+                mActionBar.setLayoutParams(
+                        new ViewGroup.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                px
+                        )
+                );
+        }
     }
 }
