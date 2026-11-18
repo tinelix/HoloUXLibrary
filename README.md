@@ -19,7 +19,16 @@ Requires Android Support Library 24.0.0. Supports Android 2.1 and above.
 
 ### How to use in your project
 
-Configure your application's theme to use _Holo4UX.Theme_ in `styles.xml`, `themes.xml`, or `AndroidManifest.xml`.
+1. Import this component as a Gradle module/library into any Android Studio project that is compatible with Gradle 2.2 or higher. Android Studio 3.x is recommended.
+2. Configure your application's theme to use _Holo4UX.Theme_ in `styles.xml`, `themes.xml`, or `AndroidManifest.xml`.
+
+#### `build.gradle` of the app
+
+```gradle
+dependencies {
+	compile project(":holo-ux") // or 'implementation project(":holo-ux")' in new versions
+}
+```
 
 #### styles.xml / themes.xml
 
