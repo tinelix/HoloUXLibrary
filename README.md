@@ -9,7 +9,5 @@ Android Holo UX backward compatibility library for Android 2.x and above with na
 
 #### Holo4UX for Android 2.x
 
-<img src="screenshots/holo4ux_2x_scr001.png" width="240" height="420" />
-<img src="screenshots/holo4ux_2x_scr002.png" width="240" height="420" />
-<img src="screenshots/holo4ux_2x_scr003.png" width="240" height="420" />
-<img src="screenshots/holo4ux_2x_scr004.png" width="240" height="420" />
+<img src="screenshots/holo4ux/holo4ux_2x_scr001.png" width="240" height="420" /> <img src="screenshots/holo4ux/holo4ux_2x_scr002.png" width="240" height="420" />
+<img src="screenshots/holo4ux/holo4ux_2x_scr003.png" width="240" height="420" /> <img src="screenshots/holo4ux/holo4ux_2x_scr004.png" width="240" height="420" />
