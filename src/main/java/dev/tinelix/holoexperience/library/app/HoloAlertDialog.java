@@ -449,7 +449,11 @@ public class HoloAlertDialog extends AlertDialog {
         }
 
         mParams.mMsgText = (String) message;
-        ((TextView) mDialogView.findViewById(R.id.message)).setText(message);
+
+        TextView msgText = mDialogView.findViewById(R.id.message);
+
+        msgText.setVisibility(View.VISIBLE);
+        msgText.setText(message);
     }
 
     @Override
@@ -484,6 +488,9 @@ public class HoloAlertDialog extends AlertDialog {
                 setTitle(mParams.mTitle);
             else
                 mDialogView.findViewById(R.id.topPanel).setVisibility(View.GONE);
+
+            if(mParams.mMsgText != null)
+                setMessage(mParams.mMsgText);
 
             if(mParams.getButtonCount() > 0) {
                 if (mParams.mNegativeButton != null)
