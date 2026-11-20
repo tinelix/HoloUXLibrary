@@ -91,6 +91,8 @@ public class HoloAlertDialog extends AlertDialog {
         setTitle(mParams.mTitle);
         if(mParams.listItems != null)
             setItems(mParams.listItems, mParams.defListItemPos, false);
+        else if(mParams.mMsgText != null)
+            setMessage(mParams.mMsgText);
         else
             setView(mParams.mView);
 
@@ -262,6 +264,7 @@ public class HoloAlertDialog extends AlertDialog {
     public static class DialogParams {
         protected int mThemeRes;
         protected String mTitle;
+        protected String mMsgText;
         protected View mView;
         protected DialogButton mNegativeButton;
         protected DialogButton mNeutralButton;
@@ -271,6 +274,7 @@ public class HoloAlertDialog extends AlertDialog {
         public OnClickListener listListener;
         public String[] listItems;
         public int defListItemPos;
+
 
         public int getButtonCount() {
 
@@ -396,6 +400,16 @@ public class HoloAlertDialog extends AlertDialog {
             dialog.show();
             return dialog;
         }
+
+        public HoloAlertDialog.Builder setMessageText(int stringId) {
+            mParams.mMsgText = mContext.getResources().getString(stringId);
+            return this;
+        }
+
+        public HoloAlertDialog.Builder setMessageText(String str) {
+            mParams.mMsgText = str;
+            return this;
+        }
     }
 
     @Override
@@ -424,6 +438,18 @@ public class HoloAlertDialog extends AlertDialog {
 
         if(title != null)
             mDialogView.findViewById(R.id.titleDivider).setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setMessage(CharSequence message) {
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            super.setMessage(message);
+            return;
+        }
+
+        mParams.mMsgText = (String) message;
+        ((TextView) mDialogView.findViewById(R.id.message)).setText(message);
     }
 
     @Override
